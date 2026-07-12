@@ -1,0 +1,43 @@
+.buttonLabel {
+  position: relative;
+  z-index: 5;
+}
+
+.buttonPrimary {
+  background-color: transparent;
+  border: 1px solid var(--background);
+  color: var(--background);
+  padding: 8px 32px;
+  position: relative;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out;
+}
+
+.buttonPrimary:hover {
+  color: var(--accent);
+}
+
+.buttonPrimary:hover::after {
+  width: 100%;
+}
+
+.buttonPrimary::after {
+  background-color: var(--background);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  width: 0%;
+  z-index: 1;
+}
+
+@media only screen and (max-width: 968px) {
+  .buttonPrimary {
+    font-size: 14px;
+    padding: 0.4rem 0.5rem;
+    text-wrap: nowrap;
+    white-space: nowrap;
+  }
+}

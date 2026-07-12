@@ -1,0 +1,12 @@
+.grid {
+  display: grid;
+  width: 100%;
+}
+
+/* HANDY */
+@media only screen and (max-width: 968px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+}
