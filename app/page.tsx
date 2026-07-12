@@ -25,6 +25,7 @@ export default function Home() {
     <main>
       <section className="section-hero">
         <video
+          autoPlay
           loop
           muted
           className="video-hero"
