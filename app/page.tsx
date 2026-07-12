@@ -16,7 +16,7 @@ import TeamCard from "./components/team/TeamCard";
 import ServiceSlider from "./components/services/ServiceSlider";
 
 export const metadata: Metadata = {
-  title: "Fiseur Akademie Offenburg",
+  title: "Friseur Akademie Offenburg",
   description: "",
 };
 
