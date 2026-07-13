@@ -30,6 +30,7 @@ export default function Home() {
           loop
           muted
           className="video-hero"
+          playsInline
           src="https://darksalmon-panther-942134.hostingersite.com/wp-content/uploads/2026/07/header-video.mp4"
         />
         <div className="video-overlay" />
