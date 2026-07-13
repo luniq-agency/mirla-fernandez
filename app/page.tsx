@@ -14,6 +14,7 @@ import AnimateDiv from "./components/animations/Container";
 import Tag from "./components/Tag";
 import TeamCard from "./components/team/TeamCard";
 import ServiceSlider from "./components/services/ServiceSlider";
+import CTA from "./components/CTA";
 
 export const metadata: Metadata = {
   title: "Friseur Akademie Offenburg",
@@ -81,9 +82,9 @@ export default function Home() {
             />
             <FeatureCard
               delay={0.4}
-              description="Für jeden Anlass perfekt gestyled"
-              image="https://www.friseur-akademie-offenburg.de/assets/img/upload/6537d24182674.jpeg"
-              title="Frisuren & Make-Up"
+              description="Auf deine Persönlichkeit abgestimmt"
+              image="https://www.friseur-akademie-offenburg.de/assets/img/upload/6544e69596545.jpeg"
+              title="Balayage & Color"
             />
           </ServiceSlider>
           {/*</Grid>*/}
@@ -132,6 +133,8 @@ export default function Home() {
               role="Diplomierte Friseurmeisterin & Coloristin"
             />
           </Grid>
+          <Divider height={6} />
+          <CTA />
         </div>
       </section>
     </main>

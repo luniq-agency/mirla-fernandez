@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Navlink from "./Navlink";
 import styles from "./Navigation.module.css";
 import { PrimaryButton } from "../buttons/Buttons";
@@ -8,31 +9,22 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Logo from "../brand/Logo";
 
+// Als Array statt als Funktion -> ermöglicht hardwarebeschleunigte Animation
+const EASE: [number, number, number, number] = [0.65, 0, 0.35, 1];
+
 export default function Navbar() {
   // SCROLL
   const lastScrollY = useRef(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Scrollposition beim Refresh wiederherstellen
     const currentY = window.scrollY;
     setIsScrolled(currentY > 10);
     lastScrollY.current = currentY;
 
     const handleScroll = () => {
       const currentY = window.scrollY;
-
-      // Solid wenn gescrollt
       setIsScrolled(currentY > 10);
-
-      // Verstecken beim Runterscrollen, zeigen beim Hochscrollen
-      /*if (currentY > lastScrollY.current && currentY > 80) {
-        setIsHidden(true); // runterscrollen → verstecken
-      } else {
-        setIsHidden(false); // hochscrollen → zeigen
-      }
-        */
-
       lastScrollY.current = currentY;
     };
 
@@ -41,12 +33,15 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={styles.navbar}
-      style={{
-        backgroundColor: isScrolled ? "rgba(50,50,50,0.7)" : "transparent",
-        backdropFilter: isScrolled ? "blur(25px)" : "none",
+    <motion.nav
+      animate={{
+        y: 0,
+        backgroundColor: isScrolled ? "rgba(50,50,50,0.7)" : "rgba(50,50,50,0)",
+        backdropFilter: isScrolled ? "blur(25px)" : "blur(0px)",
       }}
+      className={styles.navbar}
+      initial={{ y: -80 }}
+      transition={{ duration: 0.9, ease: EASE }}
     >
       <div className={styles.navbarInner}>
         <Logo />
@@ -57,6 +52,6 @@ export default function Navbar() {
         </Row>
         <PrimaryButton label="Termin buchen" />
       </div>
-    </nav>
+    </motion.nav>
   );
 }

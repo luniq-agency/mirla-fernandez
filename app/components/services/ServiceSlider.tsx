@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, useState, type ReactNode } from "react";
+import { Children, useEffect, useState, type ReactNode } from "react";
 import styles from "./Services.module.css";
 import SplitText from "../animations/SplitText";
 
@@ -10,14 +10,40 @@ interface Props {
   itemsPerView?: number;
 }
 
+const MOBILE_BREAKPOINT = 767;
+
+function useResponsiveItemsPerView(desktopValue: number) {
+  const [itemsPerView, setItemsPerView] = useState(desktopValue);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
+
+    const update = () => {
+      setItemsPerView(mediaQuery.matches ? 1 : desktopValue);
+    };
+
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, [desktopValue]);
+
+  return itemsPerView;
+}
+
 export default function ServiceSlider({
   title,
   children,
-  itemsPerView = 3,
+  itemsPerView: itemsPerViewProp = 3,
 }: Props) {
+  const itemsPerView = useResponsiveItemsPerView(itemsPerViewProp);
   const slides = Children.toArray(children);
   const [index, setIndex] = useState(0);
   const maxIndex = Math.max(slides.length - itemsPerView, 0);
+
+  // Index clampen, falls sich itemsPerView (z. B. durch Resize) ändert
+  useEffect(() => {
+    setIndex((i) => Math.min(i, maxIndex));
+  }, [maxIndex]);
 
   const handlePrev = () => setIndex((i) => Math.max(i - 1, 0));
   const handleNext = () => setIndex((i) => Math.min(i + 1, maxIndex));

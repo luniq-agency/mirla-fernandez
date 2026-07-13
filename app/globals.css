@@ -44,6 +44,15 @@ button {
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  padding: 0rem 1rem;
+}
+
+.cta-wrapper {
+  background-color: var(--foreground);
+  color: var(--background);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 footer {
@@ -109,11 +118,6 @@ section {
   padding: 5rem 1rem;
   position: relative;
   z-index: 3;
-}
-
-p,
-span {
-  font-family: var(--font-body);
 }
 
 .sticky {
